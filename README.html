@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Markdown Renderer</title>
+
+    <link rel="stylesheet" type="text/css" href="github-markdown.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.7.0/marked.min.js" integrity="sha384-A2meAH/EBUmTe03onZ9jTF8Lw/XhlHxLimTJJNTz2YXboN3JKkL7qKPuecevoB7R" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function(){
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="markdown_content"></div>
+    <script>
+      (function(){
+        let target = $("#markdown_content");
+        $.ajax({
+          url: window.location.href.match(".+/(.+?)\.[a-z0-9]+([\?#;].*)?$")[1]+".md",
+        }).done(function(data){
+          target.append(marked(data));
+        }).fail(function(data){
+          target.append("This content failed to load.");
+        });
+      })();
+    </script>
+  </body>
+</html>
+
